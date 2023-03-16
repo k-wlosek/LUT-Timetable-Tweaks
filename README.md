@@ -8,7 +8,7 @@ Import your timetable into `calendar_app_name` for classes which actually take p
 
 
 #### Fixes:
-- Adds one occurence classes (happening only **once**) only once - on the day they are actually taking place, instead of every week
+- Adds one occurrence classes (happening only **once**) only once - on the day they are actually taking place, instead of every week
 - Adds week-based classes on weeks they are taking place, instead of every week
 - Adds building-based alerts, so you can make it on time
 - Allows for tweaking start/end time of event
@@ -61,8 +61,8 @@ time_wishes:
   - '140000'
   - '160000'
 ```
-All occurences of event (starting with) `foo` that have previously started at 12:00 and ended at 14:00, now start at 11:45 and end at 13:45. 
-Also, all occurences of event (starting with) `bar` that have previously started at 14:15 and ended at 16:15, now start at 14:00 and end at 16:00.
+All occurrences of event (starting with) `foo` that have previously started at 12:00 and ended at 14:00, now start at 11:45 and end at 13:45. 
+Also, all occurrences of event (starting with) `bar` that have previously started at 14:15 and ended at 16:15, now start at 14:00 and end at 16:00.
 
 <br>
 

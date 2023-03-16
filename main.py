@@ -101,16 +101,16 @@ if __name__ == "__main__":
     fixed = []
     for index, event in enumerate(events):
         log.debug(event)
-        # Find if event is a one_occurence_event occurrence
-        one_occurence_event = re.match(r'[\s\S.]*?SUMMARY:.*?- (\d\d\.\d\d)', event)
-        if one_occurence_event:
+        # Find if event is a one_occurrence_event occurrence
+        one_occurrence_event = re.match(r'[\s\S.]*?SUMMARY:.*?- (\d\d\.\d\d)', event)
+        if one_occurrence_event:
             reported_start = re.match(r'[\s\S.]*?DTSTART:(.*)', event).group(1)
             reported_month, reported_day = datetime_from_utc_to_local(
                 datetime.strptime(reported_start, '%Y%m%dT%H%M%SZ')).month, datetime_from_utc_to_local(
                 datetime.strptime(reported_start, '%Y%m%dT%H%M%SZ')).day
-            correct_month, correct_day = datetime.strptime(one_occurence_event.group(1),
+            correct_month, correct_day = datetime.strptime(one_occurrence_event.group(1),
                                                            '%d.%m').month, datetime.strptime(
-                one_occurence_event.group(1), '%d.%m').day
+                one_occurrence_event.group(1), '%d.%m').day
             if not ((reported_day == correct_day) and (reported_month == correct_month)):
                 # it's incorrect, skip adding alarms and fixes, as it will not be included
                 continue
@@ -218,6 +218,6 @@ if __name__ == "__main__":
         fixed.append(
             event[:second_last_newline + 1] + f'BEGIN:VALARM\nTRIGGER:-PT{togo}M\nATTACH;VALUE=URI:Chord\nACTION'
                                               f':AUDIO\nEND:VALARM' +
-            event[second_last_newline:])
+            event[second_last_newline:])  # TODO: I'm guessing URI:Chord might be app-specific, change to be universal
     log.info('Success!' if assemble_calendar_file(header, fixed, 'newcal.ics')
              else 'Something has gone catastrophically wrong')
