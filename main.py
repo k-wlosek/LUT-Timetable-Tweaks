@@ -160,6 +160,8 @@ if __name__ == "__main__":
             week_event = re.match(r'[\s\S.]*?DTSTART:(.*)', event).group(1)
             week_event_datetime = datetime_from_utc_to_local(
                 datetime.strptime(week_event, '%Y%m%dT%H%M%SZ'))
+            # noinspection PyUnboundLocalVariable
+            # it's fine, probably
             delta = (week_event_datetime - first_week_datetime).days + 7  # account for same week check
             week_delta = math.ceil(delta / 7)
             log.debug(week_name, week_range, week_event_datetime, delta, week_delta)
@@ -218,4 +220,4 @@ if __name__ == "__main__":
                                               f':AUDIO\nEND:VALARM' +
             event[second_last_newline:])
     log.info('Success!' if assemble_calendar_file(header, fixed, 'newcal.ics')
-          else 'Something has gone catastrophically wrong')
+             else 'Something has gone catastrophically wrong')
